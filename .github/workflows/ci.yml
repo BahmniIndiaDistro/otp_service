@@ -6,6 +6,9 @@ on:
       - master
       - BAH-1612
 
+env:
+  BAHMNI_VERSION: 0.94
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,8 +22,6 @@ jobs:
         run: dotnet build otp_service.sln
       - name: Run unit tests
         run: dotnet test otp_service.sln
-      - name: Set env
-        run: echo "RELEASE_VERSION=$(echo $GITHUB_SHA | head -c7)" >> $GITHUB_ENV
       - name: Test coverage
         run: dotnet test test/In.ProjectEKA.OtpServiceTest/In.ProjectEKA.OtpServiceTest.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
       - name: Login to DockerHub
@@ -32,4 +33,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: bahmniindiadistro/otp-service:$RELEASE_VERSION,bahmniindiadistro/otp-service
+          tags: bahmniindiadistro/otp-service:${{env.BAHMNI_VERSION}}-${{github.run_number}},bahmniindiadistro/otp-service
