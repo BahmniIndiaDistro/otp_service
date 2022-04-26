@@ -29,4 +29,4 @@ jobs:
       uses: docker/build-push-action@v2
       with:ß
         push: true
-        tags: bahmniindiadistro/otp-service:${RELEASE_VERSION},bahmniindiadistro/otp-service
+        tags: bahmniindiadistro/otp-service:$RELEASE_VERSION,bahmniindiadistro/otp-service
