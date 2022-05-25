@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Chart.Name }}-config
 data:
-  $WHITELISTED_NUMBERS:  "{{ .Values.config.WHITELISTED_NUMBERS }}"
+  whitelisted__numbers:  "{{ .Values.config.WHITELISTED_NUMBERS }}"
