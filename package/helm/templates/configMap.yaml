@@ -4,3 +4,4 @@ metadata:
   name: {{ .Chart.Name }}-config
 data:
   whitelisted__numbers:  "{{ .Values.config.WHITELISTED_NUMBERS }}"
+  ConnectionStrings__DefaultConnection: "{{ .Values.config.CONNECTION_STRING }}"
