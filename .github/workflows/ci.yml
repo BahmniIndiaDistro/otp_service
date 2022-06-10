@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - ABDM-Infra
 
 env:
   BAHMNI_VERSION: 0.94
