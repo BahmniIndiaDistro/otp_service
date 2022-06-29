@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - otp_generation
 
 env:
   BAHMNI_VERSION: 0.94

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+
 namespace In.ProjectEKA.OtpService.Otp
 {
 	using System.Threading.Tasks;
@@ -11,18 +13,23 @@ namespace In.ProjectEKA.OtpService.Otp
     {
         private readonly OtpSenderFactory otpSenderFactory;
         private readonly OtpVerifier otpVerifier;
+        private readonly ILogger<OtpController> logger;
 
-        public OtpController(OtpSenderFactory otpSenderFactory, OtpVerifier otpVerifier)
+        public OtpController(OtpSenderFactory otpSenderFactory, OtpVerifier otpVerifier, ILogger<OtpController> logger)
         {
             this.otpSenderFactory = otpSenderFactory;
             this.otpVerifier = otpVerifier;
+            this.logger = logger;
         }
 
         [HttpPost]
         public async Task<ActionResult> GenerateOtp([FromBody] OtpGenerationRequest request)
         {
+            logger.Log(LogLevel.Debug,"Inside otp service\n");
+            logger.Log(LogLevel.Warning, "requestbody: "+request.ToString());
             var otpService = otpSenderFactory.ServiceFor(request?.Communication?.Value);
             var generateOtp = await otpService.GenerateOtp(request);
+            logger.Log(LogLevel.Warning, "before return "+generateOtp.ToString());
             return ResultFrom(generateOtp);
         }
 

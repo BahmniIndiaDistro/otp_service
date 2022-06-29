@@ -8,6 +8,7 @@ using In.ProjectEKA.OtpService.Otp.Model;
 using In.ProjectEKA.OtpServiceTest.Otp.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Optional;
 using Xunit;
@@ -25,6 +26,8 @@ namespace In.ProjectEKA.OtpServiceTest.Otp
         private readonly OtpProperties otpProperties = new OtpProperties(5);
         private readonly SmsServiceProperties smsServiceProperties = new SmsServiceProperties(String.Empty,
             String.Empty, String.Empty, String.Empty, String.Empty, 0, String.Empty);
+        private readonly Mock<ILogger<OtpController>> logger =
+            new Mock<ILogger<OtpController>>();
         public OtpControllerTest()
         {
             otpRepository = new Mock<IOtpRepository>();
@@ -33,7 +36,8 @@ namespace In.ProjectEKA.OtpServiceTest.Otp
             var otpService = new OtpSender(otpRepository.Object, otpGenerator.Object, smsClient.Object, otpProperties, smsServiceProperties);
             var otpServiceFactory = new OtpSenderFactory(otpService, new FakeOtpSender(otpRepository.Object), null);
             otpController = new OtpController(otpServiceFactory,
-                new OtpVerifier(otpRepository.Object, new OtpProperties(1)));
+                new OtpVerifier(otpRepository.Object, new OtpProperties(1)),logger.Object);
+            
         }
 
         [Fact]
