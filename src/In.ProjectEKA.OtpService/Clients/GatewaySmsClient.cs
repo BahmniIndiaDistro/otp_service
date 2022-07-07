@@ -38,7 +38,6 @@ namespace In.ProjectEKA.OtpService.Clients
             var phoneNumberWithCountryCode = phoneNumber;
             if (phoneNumber.Contains('-'))
                 phoneNumberWithCountryCode = phoneNumber.Replace("+", string.Empty).Replace("-", String.Empty);
-
             try
             {
                 var uriBuilder = new UriBuilder(smsServiceProperties.SmsApi);

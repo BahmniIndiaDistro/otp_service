@@ -2,6 +2,7 @@ namespace In.ProjectEKA.OtpService.Otp
 {
 	using System.Collections.Generic;
 	using System.Linq;
+    using Common.Logger;
 
 	public class OtpSenderFactory
     {
@@ -22,6 +23,7 @@ namespace In.ProjectEKA.OtpService.Otp
         {
             if (mobileNumber != null && whitelistedNumbers.Any(number => number.Contains(mobileNumber)))
             {
+                Log.Information("FAKE OTP");
                 return fakeOtpSender;
             }
 
