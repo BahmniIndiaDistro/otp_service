@@ -1,3 +1,5 @@
+using In.ProjectEKA.OtpService.Clients;
+
 namespace In.ProjectEKA.OtpServiceTest.Notification
 {
 	using System.Threading.Tasks;
@@ -12,11 +14,12 @@ namespace In.ProjectEKA.OtpServiceTest.Notification
 	public class NotificationControllerTest
     {
         private readonly NotificationController notificationController;
+        private readonly Mock<ISmsClient> smsClient = new Mock<ISmsClient>();
         private readonly Mock<INotificationService> notificationService = new Mock<INotificationService>();
 
         public NotificationControllerTest()
         {
-            notificationController = new NotificationController(notificationService.Object);
+            notificationController = new NotificationController(notificationService.Object,smsClient.Object);
         }
         
         [Fact]
