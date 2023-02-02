@@ -40,6 +40,8 @@ namespace In.ProjectEKA.OtpService.Notification
 				ResponseType.Success => Ok(notificationResponse),
 				ResponseType.InternalServerError => StatusCode(StatusCodes.Status500InternalServerError,
 					notificationResponse),
+				ResponseType.Error402 => StatusCode(StatusCodes.Status402PaymentRequired, notificationResponse),
+				ResponseType.Error => StatusCode(StatusCodes.Status503ServiceUnavailable, notificationResponse),
 				_ => NotFound(notificationResponse)
 				};
 		}
