@@ -31,6 +31,7 @@ namespace In.ProjectEKA.OtpService.Notification
 		[HttpPost("sms")]
 		public async Task<ActionResult> SendSMS([FromBody] SMSRequest smsRequest)
 		{
+			Log.Information("Inside SendSMS");
 			return ResponseFrom(await smsClient.Send(Uri.UnescapeDataString(smsRequest.PhoneNumber),smsRequest.Message));
 		}
 		private ActionResult ResponseFrom(Response notificationResponse)
