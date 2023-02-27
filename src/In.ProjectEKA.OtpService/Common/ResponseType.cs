@@ -7,5 +7,7 @@ namespace In.ProjectEKA.OtpService.Common
         OtpInvalid,
         OtpExpired,
         OtpValid,
+        Error,
+        Error402
     }
 }

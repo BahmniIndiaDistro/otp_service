@@ -45,6 +45,8 @@ namespace In.ProjectEKA.OtpService.Clients
 	            Log.Information(contents);
 	            if (response.StatusCode == (HttpStatusCode) 200)
 		            return new Response(ResponseType.Success, "Notification sent");
+	            if (response.StatusCode == (HttpStatusCode) 402)
+		            return new Response(ResponseType.Error402, "Error in sending notification");
 	            Log.Error(response.StatusCode,response.Content);
             }
 	        catch (Exception exception)
@@ -52,7 +54,7 @@ namespace In.ProjectEKA.OtpService.Clients
 		        Log.Error(exception, exception.StackTrace);
 		        return new Response(ResponseType.InternalServerError, "Unable to send message.");
 	        }
-	        return new Response(ResponseType.Success, "Error in sending notification");
+	        return new Response(ResponseType.Error, "Error in sending notification");
         }
     }
 }
